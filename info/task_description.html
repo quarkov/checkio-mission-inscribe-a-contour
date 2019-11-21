@@ -1,0 +1,86 @@
+<div style="margin-left: 30px">
+    <p align="justify">
+        Over the past almost 15 years, <a href="https://en.wikipedia.org/wiki/3D_printing" target="_blank" title="3D printing">3D printing</a>
+        has become very popular, not only amongst the big industrial companies which can afford to buy a super expensive
+        3D manufacturing complex (e.i. <a href="https://en.wikipedia.org/wiki/Selective_laser_melting" target="_blank" title="Selective Laser Melting">SLM</a>
+        or <a href="https://en.wikipedia.org/wiki/Selective_laser_sintering" target="_blank" title="Selective Laser Sintering">SLS</a>
+        machines), but also among ordinary people, engineers and enthusiasts. It started in 2005 with the
+        <a href="https://reprap.org/wiki/RepRap" target="_blank" title="Replicating Rapid Prototyper">RepRap</a> project  within the University of Bath.
+        The project's main objective was to develop an affordable production system that would enable the production of cheap everyday household goods
+        regardless of the household's location. The project was successful and gave birth to the printer called "Darwin" at the beginning of 2008.
+        It was a fully open project under the GNU GPL and by the end of 2008th ~100 copies of "Darwin" have been produced in various countries.
+        Since then, there has been an exponential increase in the number of printers manufactured, both DIY and commercial.
+        Most of the <a href="https://en.wikipedia.org/wiki/Fused_filament_fabrication#Fused_deposition_modeling" target="_blank" title="Fused Deposition Modeling">FDM</a>
+        printers you may find today in libraries, universities, workshops, engineering companies,
+        friend's houses are likely to be direct descendants of that very first desktop printer.
+        I do not possess any more up to date information, but in 2013th it's been sold ~72.000 of desktop printers, in 2014th - almost 140.000
+        (according to the <a href="https://wohlersassociates.com/" target="_blank" title="Wohlers Main Page">Wohlers Report</a>).
+    </p>
+
+    <br>
+
+    <div>
+        <img src="{{MEDIA}}slicing.png" alt="slicing" style="max-height: 187px; margin-right: 40px" align="left">
+        <p align="justify">
+            Leaving aside the 3D design process, which is the first step on the way to something to be printed, we go straight to preparing a 3D model for printing.
+            There's a variety of software applications designed for that purpose called <i>slicers</i>. They slice a 3D model from the bottom
+            to the top with a constant (not always) height and get a sequence of the planar contours, each of which is represented by a sequence of the dots.
+        </p>
+    </div>
+
+    <br>
+
+    <img  title="drawing" src="{{MEDIA}}drawing.png" alt="drawing" style="max-height: 300px; float: right; margin-left: 30px">
+
+    <p align="justify">
+        These sequences of dots then, obvious, are used for a printing program along with the calculated velocities, accelerations, etc.
+        In order to estimate if a model fits the printer <a href="https://www.youtube.com/watch?v=U-8-lu4mq8o" target="_blank" title="printing process">building table (video)</a>
+        and then can be printed, our slicing software should find the optimal orientation of the model on the table, so the model will require the least possible space.
+        <br>
+        So, in this mission your task is to find the smallest rectangle (in terms of its area) into which a given planar contour cab be inscribed.
+        The contour, in turn, is an orthogonal projection of the 3D model onto a horizontal plane.
+    </p>
+
+    <br>
+
+    <p>
+        <strong>Input: </strong> A list of tuples, each tuple contains coordinates of a contour's dot (x, y). All given coordinates are integers.
+    </p>
+
+    <p>
+        <strong>Output: </strong> The area of the smallest rectangle (with ±0.001 precision) which inscribes the given contour.
+    </p>
+
+    <div class="for_info_only">
+        <p>
+            <strong>Example:</strong>
+        </p>
+
+    {% if interpreter.slug == "js-node" %}
+    <pre class="brush: javascript">inscribe([(1, 1), (1, 2), (0, 2), (3, 5), (3, 4), (4, 4)]) == 6.0
+    inscribe([(6, 5), (10, 7), (8, 2)]) == 20.0
+    inscribe([(2, 3), (3, 8), (8, 7), (9, 2), (3, 2), (4, 4), (6, 6), (7, 3), (5, 3)]) == 41.538
+
+    </pre>
+    {% else %}
+    <pre class="brush: python">inscribe([(1, 1), (1, 2), (0, 2), (3, 5), (3, 4), (4, 4)]) == 6.0
+    inscribe([(6, 5), (10, 7), (8, 2)]) == 20.0
+    inscribe([(2, 3), (3, 8), (8, 7), (9, 2), (3, 2), (4, 4), (6, 6), (7, 3), (5, 3)]) == 41.538
+    </pre>
+    {% endif %}
+    </div>
+
+    <img  title="drawing" src="{{MEDIA}}examples.png" alt="examples" style="max-height: 280px; align: center; margin-top: 25px">
+
+    <p>
+        <strong>Precondition:</strong>
+        <ul>
+        <li>n ∈ [3; 30] - dots count</li>
+        <li>i = range(n)</li>
+        <li>x<sub>i</sub> ∈ [0; 300] - x coordinate of the i-th dot</li>
+        <li>y<sub>i</sub> ∈ [0; 300] - y coordinate of the i-th dot</li>
+        <li>there won't be two (or more) similar dots</li>
+        <li>there won't be a case with all the dots on the same line</li>
+        </ul>
+    </p>
+</div>
