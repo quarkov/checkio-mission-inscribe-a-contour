@@ -10,7 +10,7 @@ if __name__ == '__main__':
     
     # These "asserts" are used for self-checking and not for an auto-testing
     assert inscribe([(1, 1), (1, 2), (0, 2), (3, 5), (3, 4), (4, 4)]) == 6.0, "1st"
-    assert inscribe([(6, 5), (10, 7), (8, 2)]) == 20.0, "2nd"
+    assert inscribe([(6, 5), (10, 7), (2, 8)]) == 20.0, "2nd"
     assert inscribe([(2, 3), (3, 8), (8, 7), (9, 2), (3, 2), (4, 4), (6, 6), (7, 3), (5, 3)]) == 41.538, "3rd"
     assert inscribe([(0, 0), (0, 10), (0, 20), (100, 20), (100, 30), (120, 30), (120, 20), (120, 10), (20, 10), (20, 0)]) == 2679.208, "4th"
     assert inscribe([(10, 250), (60, 300), (300, 60), (250, 10)]) == 24000.0, "5th"
