@@ -29,7 +29,7 @@ checkio.referee.cover_codes
 from checkio.signals import ON_CONNECT
 from checkio import api
 from checkio.referees.io import CheckiOReferee
-from checkio.referees import cover_codes
+from checkio.referees import cover_codes, checkers
 
 from tests import TESTS
 
@@ -44,5 +44,6 @@ api.add_listener(
         cover_code={
             'python-3': cover_codes.unwrap_args,
             'js-node': cover_codes.js_unwrap_args
-        }
+        },
+        checker=checkers.float_comparison(4),
     ).on_ready)
