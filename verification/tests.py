@@ -1,3 +1,40 @@
+from my_solution import inscribe
+from random import randint
+from math import hypot
+
+
+def random_point(MIN=0, MAX=300):  # Too crazy?!
+    """ Random 2D point with random number of decimals. """
+    x, y = randint(0, 2), randint(0, 2)
+    return tuple(randint(MIN, MAX * 10**i) / 10**i
+                 if i else randint(MIN, MAX)
+                 for i in (x, y))
+
+
+def distance(x1, y1, x2, y2): return hypot(x2 - x1, y2 - y1)
+
+
+def colinear(x1, y1, x2, y2): return x1 * y2 == y1 * x2
+
+
+def random_points(min_distance=10):
+    nb_points = randint(3, 30)
+    while True:
+        result = []
+        while len(result) != nb_points:
+            # It could be an infinite loop if min_distance is too big.
+            pt = random_point()
+            # TEST "there won't be two (or more) similar dots"
+            if all(distance(*pt, *a) >= min_distance for a in result):
+                result.append(pt)
+        # TEST "there won't be a case with all the dots on the same line"
+        pt = result[0]
+        vectors = ((pt[0] - a[0], pt[1] - a[1]) for a in result[1:])
+        v1 = next(vectors)
+        if not all(colinear(*v1, *v2) for v2 in vectors):
+            return result
+        # It's very unlikely for random points to be all colinears.
+        # Start again if that happens...
 
 
 TESTS = {
@@ -53,5 +90,25 @@ TESTS = {
             "input": [[(2, 2), (6, 1), (6, 3), (5, 4), (7, 5), (3, 6), (4, 3)]],
             "answer": 17.0
         }
-    ]
-}
+    ],
+    'Random': [{'input': [pts], 'answer': inscribe(pts)}
+               for pts in (random_points() for _ in range(10))],
+    }
+
+
+if __name__ == '__main__':
+    # To visualize on local machine.
+    from pprint import pprint
+    import matplotlib.pyplot as plt
+    pprint(TESTS)
+
+    all_tests = [test['input'][0] for lst in TESTS.values() for test in lst]
+    print(len(all_tests), 'tests.')
+
+    for index, points in enumerate(all_tests, 1):
+        plt.subplot(5, 5, index)  # nb_row, nb_col, index
+        plt.plot([p[0] for p in points],
+                 [p[1] for p in points],
+                 marker='.',
+                 linestyle='')
+    plt.show()
