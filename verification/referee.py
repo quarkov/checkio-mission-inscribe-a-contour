@@ -45,5 +45,5 @@ api.add_listener(
             'python-3': cover_codes.unwrap_args,
             'js-node': cover_codes.js_unwrap_args
         },
-        checker=checkers.float_comparison(4),
+        checker=checkers.float_comparison(3),
     ).on_ready)
