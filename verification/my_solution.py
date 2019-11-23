@@ -89,7 +89,7 @@ if __name__ == '__main__':
     from local_visualization import local_visualization
 
     points_and_rect = []
-    for index, (points, answer) in enumerate(TESTS, 1):
+    for points, answer in TESTS:
         area, rect = inscribe(points)
         assert abs(area - answer) <= 1e-3
         points_and_rect.append((points, rect))
