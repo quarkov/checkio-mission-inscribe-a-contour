@@ -114,30 +114,12 @@ for _ in range(10):
 
 
 if __name__ == '__main__':
-    # To visualize on local machine.
     from pprint import pprint
-    import matplotlib.pyplot as plt
+    from local_visualization import local_visualization
     pprint(TESTS)
 
-    all_tests = [test for lst in TESTS.values() for test in lst]
-    print(len(all_tests), 'tests.')
+    points_and_rect = [(test['input'][0], test['explanation'])
+                       for lst in TESTS.values() for test in lst]
+    print(f'There are {len(points_and_rect)} tests.')
 
-    for index, test in enumerate(all_tests, 1):
-        points = test['input'][0]
-
-        rect = test['explanation']
-        rect.append(rect[0])  # useful to visualize all four edges.
-
-        # In each subplot: black points in a green rectangle, the smallest one.
-        plt.subplot(5, 5, index)  # nb_row, nb_col, index
-        plt.plot([p[0] for p in points],
-                 [p[1] for p in points],
-                 color='black',
-                 marker='.',
-                 linestyle='')
-        plt.plot([p[0] for p in rect],
-                 [p[1] for p in rect],
-                 color='green',
-                 linestyle='-', lw=.5)
-        plt.axis('equal')  # rectangles look like rectangles now.
-    plt.show()
+    local_visualization(*points_and_rect, nb_rows=5)

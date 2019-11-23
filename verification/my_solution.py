@@ -86,23 +86,12 @@ if __name__ == '__main__':
         ([(2, 2), (6, 1), (6, 3), (5, 4), (7, 5), (3, 6), (4, 3)], 17.0),
         ]
 
-    import matplotlib.pyplot as plt
-    # All 12 plots in one.
-    for index, (points, answer) in enumerate(TESTS, 1):
-        res, rect = inscribe(points)
-        assert abs(res - answer) <= 1e-3
+    from local_visualization import local_visualization
 
-        # Black points in the smallest green rectangle containing them.
-        plt.subplot(4, 3, index)  # nb_rows, nb_cols, index of the subplot
-        plt.plot([p[0] for p in points],
-                 [p[1] for p in points],
-                 color='black',
-                 marker='.',
-                 linestyle='')
-        rect.append(rect[0])
-        plt.plot([p[0] for p in rect],
-                 [p[1] for p in rect],
-                 color='green',
-                 linestyle='-', lw=.5)
-        plt.axis('equal')
-    plt.show()
+    points_and_rect = []
+    for index, (points, answer) in enumerate(TESTS, 1):
+        area, rect = inscribe(points)
+        assert abs(area - answer) <= 1e-3
+        points_and_rect.append((points, rect))
+
+    local_visualization(*points_and_rect, nb_rows=3)
