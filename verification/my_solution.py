@@ -12,7 +12,6 @@ def inscribe(contour):
         # The hull in this new base.
         new_hull = [(z - a) / dx for z in hull]
         xs, ys = [z.real for z in new_hull], [z.imag for z in new_hull]
-        # return (max(xs) - min(xs)) * max(map(abs, ys))  # width * height
 
         # Determine coordinates for the rectangle...
         x_min, x_max = min(xs), max(xs)
@@ -23,7 +22,6 @@ def inscribe(contour):
         rect = [a + dx * complex(*pt) for pt in rect]
         # Then to real coordinates.
         rect = [(z.real, z.imag) for z in rect]
-        # rect.append(rect[0])  # useful to visualize all four edges.
         return abs(x_max - x_min) * abs(y_max - y_min), rect
 
     hull = [complex(*pt) for pt in convex_hull(contour)]

@@ -125,14 +125,7 @@ if __name__ == '__main__':
     for index, test in enumerate(all_tests, 1):
         points = test['input'][0]
 
-        # To remember to add explanations for the 12 first tests.
-        try:
-            rect = test['explanation']
-        except KeyError:
-            print(f'explanation missing at test #{index}')
-            rect = inscribe(points)[1]
-            rect = [(round(x, 3), round(y, 3)) for x, y in rect]
-            print(rect)
+        rect = test['explanation']
         rect.append(rect[0])  # useful to visualize all four edges.
 
         # In each subplot: black points in a green rectangle, the smallest one.
