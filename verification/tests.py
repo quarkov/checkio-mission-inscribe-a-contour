@@ -91,9 +91,13 @@ TESTS = {
             "answer": 17.0
         }
     ],
-    'Random': [{'input': [pts], 'answer': inscribe(pts)}
-               for pts in (random_points() for _ in range(10))],
+    'Random': [],
     }
+
+for _ in range(10):
+    pts = random_points()
+    area, rect = inscribe(pts)
+    TESTS['Random'].append(dict(input=[pts], answer=area, explanation=rect))
 
 
 if __name__ == '__main__':
@@ -102,13 +106,30 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     pprint(TESTS)
 
-    all_tests = [test['input'][0] for lst in TESTS.values() for test in lst]
+    all_tests = [test for lst in TESTS.values() for test in lst]
     print(len(all_tests), 'tests.')
 
-    for index, points in enumerate(all_tests, 1):
+    for index, test in enumerate(all_tests, 1):
+        points = test['input'][0]
+
+        # To remember to add explanations for the 12 first tests.
+        try:
+            rect = test['explanation']
+        except KeyError:
+            print(f'explanation missing at test #{index}')
+            rect = inscribe(points)[1]
+        rect.append(rect[0])  # useful to visualize all four edges.
+
+        # In each subplot: black points in a green rectangle, the smallest one.
         plt.subplot(5, 5, index)  # nb_row, nb_col, index
         plt.plot([p[0] for p in points],
                  [p[1] for p in points],
+                 color='black',
                  marker='.',
                  linestyle='')
+        plt.plot([p[0] for p in rect],
+                 [p[1] for p in rect],
+                 color='green',
+                 linestyle='-', lw=.5)
+        plt.axis('equal')  # rectangles look like rectangles now.
     plt.show()
