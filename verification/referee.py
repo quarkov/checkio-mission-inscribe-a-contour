@@ -33,6 +33,15 @@ from checkio.referees import cover_codes, checkers
 
 from tests import TESTS
 
+cover_tuple = '''
+def cover(func, data):
+    # There is only one argument in the arguments' list.
+    data = data[0]
+    # User won't get tuples but lists without that. Because json interfere.
+    data = list(map(tuple, data))
+    return func(data)
+'''
+
 api.add_listener(
     ON_CONNECT,
     CheckiOReferee(
@@ -42,7 +51,7 @@ api.add_listener(
             "js": "inscribe"
         },
         cover_code={
-            'python-3': cover_codes.unwrap_args,
+            'python-3': cover_tuple,
             'js-node': cover_codes.js_unwrap_args
         },
         checker=checkers.float_comparison(3),
