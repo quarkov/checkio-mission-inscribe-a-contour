@@ -20,7 +20,7 @@
     <br>
 
     <div>
-        <img src="{{MEDIA}}slicing.png" alt="slicing" style="max-height: 187px; margin-right: 30px" align="left">
+        <img src="{{MEDIA}}slicing.png" alt="slicing" style="max-height: 265px; margin-right: 30px" align="left">
         <p align="justify">
             Не станем останавливаться на 3D-проектировании, которое является первым шагом на пути создания изделия, которое в дальнейшем может быть напечатано,
             а перейдём сразу к подготовке модели для печати. Для этих целей есть специальные программы-<i>слайсеры</i>.
@@ -31,7 +31,7 @@
 
     <br>
 
-    <img  title="drawing" src="{{MEDIA}}drawing.png" alt="drawing" style="max-height: 300px; float: right; margin-left: 30px; margin-top: 20px">
+    <img  title="drawing" src="{{MEDIA}}drawing.png" alt="drawing" style="max-height: 370px; float: right; margin-left: 25px; margin-top: 20px">
 
     <p align="justify">
         Имея в распоряжении координаты этих точек и требуемые значения параметров печати (температура, скорости, ускорения и т.д.)
@@ -50,7 +50,7 @@
         точек не играет роли и никак не влияет на результат.
     </p>
 
-    <p>
+    <p align="justify">
         <strong>Выходные данные: </strong> Площадь наименьшего прямоугольника (с точностью ±0.001), в который можно вписать данный контур (совокупность точек).
     </p>
 
@@ -60,15 +60,17 @@
         </p>
 
     {% if interpreter.slug == "js-node" %}
-    <pre class="brush: javascript">inscribe([(1, 1), (1, 2), (0, 2), (3, 5), (3, 4), (4, 4)]) == 6.0
-inscribe([(6, 5), (10, 7), (2, 8)]) == 20.0
-inscribe([(2, 3), (3, 8), (8, 7), (9, 2), (3, 2), (4, 4), (6, 6), (7, 3), (5, 3)]) == 41.538
+    <pre class="brush: javascript">
+inscribe([(1, 1), (1, 2), (0, 2), (3, 5), (3, 4), (4, 4)]) == 6.0                               //example №1
+inscribe([(6, 5), (10, 7), (2, 8)]) == 20.0                                                     //example №2
+inscribe([(2, 3), (3, 8), (8, 7), (9, 2), (3, 2), (4, 4), (6, 6), (7, 3), (5, 3)]) == 41.538    //example №3
 
     </pre>
     {% else %}
-    <pre class="brush: python">inscribe([(1, 1), (1, 2), (0, 2), (3, 5), (3, 4), (4, 4)]) == 6.0
-inscribe([(6, 5), (10, 7), (2, 8)]) == 20.0
-inscribe([(2, 3), (3, 8), (8, 7), (9, 2), (3, 2), (4, 4), (6, 6), (7, 3), (5, 3)]) == 41.538
+    <pre class="brush: python">
+inscribe([(1, 1), (1, 2), (0, 2), (3, 5), (3, 4), (4, 4)]) == 6.0                               #example №1
+inscribe([(6, 5), (10, 7), (2, 8)]) == 20.0                                                     #example №2
+inscribe([(2, 3), (3, 8), (8, 7), (9, 2), (3, 2), (4, 4), (6, 6), (7, 3), (5, 3)]) == 41.538    #example №3
     </pre>
     {% endif %}
     </div>
