@@ -3,12 +3,7 @@ from random import randint
 from math import hypot
 
 
-def random_point(MIN=0, MAX=300):  # Too crazy?!
-    """ Random 2D point with random number of decimals. """
-    x, y = randint(0, 2), randint(0, 2)
-    return tuple(randint(MIN, MAX * 10**i) / 10**i
-                 if i else randint(MIN, MAX)
-                 for i in (x, y))
+def random_point(MIN=0, MAX=300): return tuple((randint(MIN, MAX), randint(MIN, MAX)))
 
 
 def distance(x1, y1, x2, y2): return hypot(x2 - x1, y2 - y1)
@@ -25,8 +20,9 @@ def random_points(min_distance=10):
             # It could be an infinite loop if min_distance is too big.
             pt = random_point()
             # TEST "there won't be two (or more) similar dots"
-            if all(distance(*pt, *a) >= min_distance for a in result):
-                result.append(pt)
+            if pt not in result:
+                if all(distance(*pt, *a) >= min_distance for a in result):
+                    result.append(pt)
         # TEST "there won't be a case with all the dots on the same line"
         pt = result[0]
         vectors = ((pt[0] - a[0], pt[1] - a[1]) for a in result[1:])
@@ -103,9 +99,9 @@ TESTS = {
             'explanation': [(2.0, 2.0), (6.0, 1.0), (7.0, 5.0), (3.0, 6.0)],
         },
         {
-            'input': [[(282.896, 212.943), (160.634, 290.233), (90.0, 276.244), (288.0, 140.0), (89.0, 23.756), (46.322, 252.04), (141.366, 3.767), (183.262, 284.148), (291.941, 186.108), (7.059, 171.108), (263.262, 240.29), (191.262, 21.852), (214.0, 30.756), (17.104, 208.943), (52.322, 41.96), (32.738, 223.29), (251.678, 249.04), (24.104, 88.057), (30.738, 62.71), (107.738, 20.852), (0.0, 146.0), (107.738, 284.148), (129.366, 279.233), (16.059, 115.892), (253.678, 43.96), (289.941, 128.892), (280.896, 88.057), (272.262, 60.71), (216.0, 275.244), (162.634, 9.767)]],
-            'answer': 79767.628,
-            'explanation': [(63.745, -26.728), (334.474, 73.184), (238.772, 332.506), (-31.957, 232.594)],
+            'input': [[(282, 212), (160, 290), (90, 276), (288, 140), (89, 23), (46, 252), (141, 3), (183, 284), (291, 186), (7, 171), (263, 240), (191, 21), (214, 30), (17, 208), (52, 41), (32, 223), (251, 249), (24, 88), (30, 62), (107, 20), (0, 146), (107, 284), (129, 279), (16, 115), (253, 43), (289, 128), (280, 88), (272, 60), (216, 275), (162, 9)]],
+            'answer': 79849.548,
+            'explanation': [(61.719, -26.814), (332.724, 69.973), (239.398, 331.285), (-31.606, 234.498)],
         },
     ],
     'Random': [],
